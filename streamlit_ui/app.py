@@ -7,7 +7,7 @@ symptom_input = st.text_area("Describe your variety of plants and symptoms")
 
 if st.button("Get solution"):
     state_input = {
-        "plantType": symptom_input,
+        "input": symptom_input,
         "plantCondition": "",
         "symptom_area": ""
     }
@@ -16,10 +16,11 @@ if st.button("Get solution"):
         response = requests.post(
             "https://agent-indoorfarming-backend.onrender.com/monitoring/invoke",
             headers={"Content-Type": "application/json"},
-            json={"plantType": state_input}  # ✅ wrap state in "input"
+            json={"input": state_input}  # ✅ wrap state in "input"
         )
 
         data = response.json()
+        print(data)
         st.write("DEBUG Raw JSON:", data)  # Optional debug
 
         st.subheader("Symptom Area Detected:")
