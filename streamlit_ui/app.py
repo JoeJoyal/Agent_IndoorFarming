@@ -14,7 +14,7 @@ if st.button("Get solution"):
 
     try:
         response = requests.post(
-            "http://localhost:8000/diagnose/invoke",
+            "https://agent-indoorfarming-backend.onrender.com/monitoring/invoke",
             headers={"Content-Type": "application/json"},
             json={"plantType": state_input}  # ✅ wrap state in "input"
         )
