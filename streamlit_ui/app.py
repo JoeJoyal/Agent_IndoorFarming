@@ -7,7 +7,7 @@ symptom_input = st.text_area("Describe your variety of plants and symptoms")
 
 if st.button("Get solution"):
     state_input = {
-        "input": symptom_input,
+        "plantType": symptom_input,
         "plantCondition": "",
         "symptom_area": ""
     }
@@ -16,7 +16,7 @@ if st.button("Get solution"):
         response = requests.post(
             "https://agent-indoorfarming-backend.onrender.com/monitoring/invoke",
             headers={"Content-Type": "application/json"},
-            json={"input": state_input}  # ✅ wrap state in "input"
+            json={"plantType": state_input}  # ✅ wrap state in "input"
         )
 
         data = response.json()
@@ -26,7 +26,7 @@ if st.button("Get solution"):
         st.write(data.get("symptom_area", "N/A"))
 
         st.subheader("AI Diagnosis Suggestion:")
-        st.write(data.get("diagnosis", "N/A"))
+        st.write(data.get("plantCondition", "N/A"))
 
     except Exception as e:
         st.error(f"Failed to get diagnosis: {e}")
