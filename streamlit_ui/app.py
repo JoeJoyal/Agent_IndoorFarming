@@ -3,7 +3,7 @@ import requests
 
 st.title("🌿 AI Powered Vertical Indoor-Farming Assistant")
 
-symptom_input = st.text_area("Describe your variety of plants and symptoms")
+symptom_input = st.text_area("Describe your variety of plants and symptoms (spinach, lettuce, basil, fruits etc.)")
 
 if st.button("Get solution"):
     state_input = {
