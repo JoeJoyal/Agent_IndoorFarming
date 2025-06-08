@@ -6,18 +6,18 @@ from tools.sysmptom_checker import check_symptom
 
 
 class DiagnosticState(TypedDict):
-    plantType:str
-    plantCondition : str
-    symptom_area: str
+    input :str
+    symptom_area : str
+    diagnosis: str
     
 def build_graph():
     graph = StateGraph(DiagnosticState)
     
     def symptom_step(state):
         return {
-                "plantType":state["plantType"],
-                "plantCondition" : check_symptom.invoke(state["plantType"]),
-                "symptom_area": state.get("diagnosis","")
+                "input":state["input"],
+                "symptom_area" : check_symptom.invoke(state["input"]),
+                "diagnosis": state.get("diagnosis","")
         }
     
     graph.add_node("symptomcheck",RunnableLambda(symptom_step))
@@ -25,9 +25,9 @@ def build_graph():
     
     def diagnosis_step(state):
         return {
-                "plantType":state["plantType"],
-                "plantCondition" : state['symptom_area'],
-                "symptom_area":ai_indoor_farming.invoke(state['plantType'])
+                "input":state["input"],
+                "symptom_area" : state['symptom_area'],
+                "diagnosis":ai_indoor_farming.invoke(state['input'])
         }
         
         
