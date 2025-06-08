@@ -8,8 +8,8 @@ symptom_input = st.text_area("Describe your variety of plants and symptoms")
 if st.button("Get solution"):
     state_input = {
         "input": symptom_input,
-        "plantCondition": "",
-        "symptom_area": ""
+        "symptom_area": "",
+        "diagnosis": ""
     }
 
     try:
@@ -27,7 +27,7 @@ if st.button("Get solution"):
         st.write(data.get("symptom_area", "N/A"))
 
         st.subheader("AI Diagnosis Suggestion:")
-        st.write(data.get("plantCondition", "N/A"))
+        st.write(data.get("diagnosis", "N/A"))
 
     except Exception as e:
         st.error(f"Failed to get diagnosis: {e}")
